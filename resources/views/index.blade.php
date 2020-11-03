@@ -3,13 +3,13 @@
 @section('content')
 <div class="container mx-auto px-4">
     <h2 class="text-blue-500 uppercase tracking-widefont-semibold">Popular Games</h2>
-    <div class="popular-games grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-6 gap-12 border-b border-gray-800 pb-16">
+    <div
+        class="popular-games grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-6 gap-12 border-b border-gray-800 pb-16">
         <!-- Game tegel -->
         <div class="game mt-8">
             <div class="relative inline-block">
                 <a href="#">
-                    <img src="/tlou2.jpg" alt="game cover"
-                        class="hover:opacity-75 transition ease-in-out duration-150">
+                    <img src="/tlou2.jpg" alt="game cover" class="hover:opacity-75 transition ease-in-out duration-150">
                 </a>
                 <div class="absolute bottom-0 right-0 w-16 h-16 bg-gray-800 rounded-full"
                     style="right:-20px;bottom:-20px">
@@ -310,50 +310,50 @@
 
             <!--Coming soon sidebar -->
 
-                <h2 class=" text-blue-500 upppercase tracking-wide font-semibold mt-10">Coming soon</h2>
-                <div class="most-anticipated-container space-y-10 mt-8">
-                    <div class="game flex">
-                        <a href="#">
-                            <img src="/cyberpunk.jpg" alt="game cover"
-                                class="w-16 hover:opacity-75 transition ease-in-out duration-150">
-                        </a>
-                        <div class="ml-4">
-                            <a href="#" class="hoover:text-gray-300">Cyberpunk 2077</a>
-                            <div class="text-gray-400 text-sm mt-1">Dec 18,2020</div>
-                        </div>
+            <h2 class=" text-blue-500 upppercase tracking-wide font-semibold mt-10">Coming soon</h2>
+            <div class="most-anticipated-container space-y-10 mt-8">
+                <div class="game flex">
+                    <a href="#">
+                        <img src="/cyberpunk.jpg" alt="game cover"
+                            class="w-16 hover:opacity-75 transition ease-in-out duration-150">
+                    </a>
+                    <div class="ml-4">
+                        <a href="#" class="hoover:text-gray-300">Cyberpunk 2077</a>
+                        <div class="text-gray-400 text-sm mt-1">Dec 18,2020</div>
                     </div>
-                    <div class="game flex">
-                        <a href="#">
-                            <img src="/doom.jpg" alt="game cover"
-                                class="w-16 hover:opacity-75 transition ease-in-out duration-150">
-                        </a>
-                        <div class="ml-4">
-                            <a href="#" class="hoover:text-gray-300">Doom</a>
-                            <div class="text-gray-400 text-sm mt-1">Nov 18,2020</div>
-                        </div>
+                </div>
+                <div class="game flex">
+                    <a href="#">
+                        <img src="/doom.jpg" alt="game cover"
+                            class="w-16 hover:opacity-75 transition ease-in-out duration-150">
+                    </a>
+                    <div class="ml-4">
+                        <a href="#" class="hoover:text-gray-300">Doom</a>
+                        <div class="text-gray-400 text-sm mt-1">Nov 18,2020</div>
                     </div>
+                </div>
 
-                    <div class="game flex">
-                        <a href="#">
-                            <img src="/Alyx.jpg" alt="game cover"
-                                class="w-16 hover:opacity-75 transition ease-in-out duration-150">
-                        </a>
-                        <div class="ml-4">
-                            <a href="#" class="hoover:text-gray-300">Afterlife</a>
-                            <div class="text-gray-400 text-sm mt-1">Dec 1,2020</div>
-                        </div>
+                <div class="game flex">
+                    <a href="#">
+                        <img src="/Alyx.jpg" alt="game cover"
+                            class="w-16 hover:opacity-75 transition ease-in-out duration-150">
+                    </a>
+                    <div class="ml-4">
+                        <a href="#" class="hoover:text-gray-300">Afterlife</a>
+                        <div class="text-gray-400 text-sm mt-1">Dec 1,2020</div>
                     </div>
+                </div>
 
-                    <div class="game flex">
-                        <a href="#">
-                            <img src="/cyberpunk.jpg" alt="game cover"
-                                class="w-16 hover:opacity-75 transition ease-in-out duration-150">
-                        </a>
-                        <div class="ml-4">
-                            <a href="#" class="hoover:text-gray-300">Cyberpunk 2077</a>
-                            <div class="text-gray-400 text-sm mt-1">Dec 18,2020</div>
-                        </div>
+                <div class="game flex">
+                    <a href="#">
+                        <img src="/cyberpunk.jpg" alt="game cover"
+                            class="w-16 hover:opacity-75 transition ease-in-out duration-150">
+                    </a>
+                    <div class="ml-4">
+                        <a href="#" class="hoover:text-gray-300">Cyberpunk 2077</a>
+                        <div class="text-gray-400 text-sm mt-1">Dec 18,2020</div>
                     </div>
+                </div>
 
 
             </div>
