@@ -29,5 +29,9 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'igdb' => [
+        'client_id' => env('IDGB_CLIENT_ID'),
+        'token' => env('IDGB_TOKEN'),
+    ],
 
 ];
