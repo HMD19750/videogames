@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laracasts Video Games</title>
     <link rel="stylesheet" href="/css/main.css">
+    @livewireStyles
  </head>
 
 <body class="bg-gray-900 text-white">
@@ -55,6 +56,7 @@
             Powered by <a href="#" class="underline hover:text-gray-400">IGDB API </a>
         </div>
     </footer>
+    @livewireScripts
 </body>
 
 </html>
