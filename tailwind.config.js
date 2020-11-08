@@ -11,7 +11,11 @@ module.exports = {
     purge: [],
 
     theme: {
-        extend: {},
+        extend: {
+            spacing: {
+                '44': '11rem'
+            }
+        },
         // defaults to these values
         spinner: (theme) => ({
             default: {
