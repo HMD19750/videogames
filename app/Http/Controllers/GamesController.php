@@ -15,9 +15,7 @@ class GamesController extends Controller
      */
     public function index()
     {
-        return view('index', [
-
-        ]);
+        return view('index', []);
     }
 
     /**
@@ -44,12 +42,39 @@ class GamesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $game = Http::withHeaders([
+            'Client-ID' => config('services.igdb.client_id'),
+        ])
+            ->withToken(config('services.igdb.token'))
+            ->withBody(
+                "fields *,
+                cover.url,
+                platforms.abbreviation,
+                involved_companies.company.name,
+                genres.name,
+                websites.*,
+                videos.*,
+                screenshots.*,
+                similar_games.cover.url,
+                similar_games.name,
+                similar_games.rating,
+                similar_games.slug,
+                similar_games.platforms.abbreviation;
+                where slug=\"{$slug}\";",
+                'text/plain'
+            )
+            ->post('https://api.igdb.com/v4/games')->json();
+
+        abort_if(!$game, 404);
+
+        return view('show', [
+            'game' => $game[0],
+        ]);
     }
 
     /**
