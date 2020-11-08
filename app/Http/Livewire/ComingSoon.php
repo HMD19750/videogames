@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Carbon\Carbon;
 use Livewire\Component;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 
@@ -16,7 +17,7 @@ class ComingSoon extends Component
 
         $now = Carbon::now()->timestamp;
 
-        $this->comingSoon = Cache::remember('coming-soon', 7, function () use ($now) {
+        $comingSoonUnformatted = Cache::remember('coming-soon', 7, function () use ($now) {
             return Http::withHeaders([
                 'Client-ID' => config('services.igdb.client_id'),
             ])
@@ -34,9 +35,22 @@ class ComingSoon extends Component
                 )
                 ->post('https://api.igdb.com/v4/games')->json();
         });
+
+        //    dump($this->formatForView($popularGamesUnformatted));
+        $this->comingSoon = $this->formatForView($comingSoonUnformatted);
     }
     public function render()
     {
         return view('livewire.coming-soon');
+    }
+
+    protected function formatForView($games)
+    {
+        return collect($games)->map(function ($game) {
+            return collect($game)->merge([
+                'coverImageUrl' => Str::replaceFirst('thumb', 'cover_small', $game['cover']['url']),
+                'first_release_date' => Carbon::parse($game['first_release_date'])->format('d M, Y'),
+            ]);
+        })->toArray();
     }
 }

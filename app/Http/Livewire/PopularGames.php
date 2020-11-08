@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Carbon\Carbon;
 use Livewire\Component;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 
@@ -14,9 +15,7 @@ class PopularGames extends Component
 
     public function loadPopularGames()
     {
-
-
-        $this->popularGames = Cache::remember('popular-games', 7, function () {
+        $popularGamesUnformatted = Cache::remember('popular-games', 7, function () {
 
             $before = Carbon::now()->subMonths(2)->timestamp;
             $after = Carbon::now()->addMonths(2)->timestamp;
@@ -26,7 +25,7 @@ class PopularGames extends Component
             ])
                 ->withToken(config('services.igdb.token'))
                 ->withBody(
-                    'fields name,rating,cover.url,follows,first_release_date,platforms.abbreviation,total_rating_count;
+                    'fields name,rating,cover.url,follows,first_release_date,platforms.abbreviation,total_rating_count,slug;
                     where total_rating_count != null
                     & platforms=(48,49,130,6)
                     &first_release_date>' . $before . '
@@ -37,10 +36,24 @@ class PopularGames extends Component
                 )
                 ->post('https://api.igdb.com/v4/games')->json();
         });
+        //    dump($this->formatForView($popularGamesUnformatted));
+        $this->popularGames = $this->formatForView($popularGamesUnformatted);
     }
 
     public function render()
     {
         return view('livewire.popular-games');
+    }
+
+    protected function formatForView($games)
+    {
+        return collect($games)->map(function ($game) {
+            return collect($game)->merge([
+                'coverImageUrl' => Str::replaceFirst('thumb', 'cover_big', $game['cover']['url']),
+                'rating' => isset($game['rating']) ? round($game['rating']) . '%' : null,
+                'platforms' => collect($game['platforms'])->pluck('abbreviation')->implode(', ')
+
+            ]);
+        })->toArray();
     }
 }
