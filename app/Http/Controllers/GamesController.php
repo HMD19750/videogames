@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
+use Symfony\Component\Console\Output\NullOutput;
 
 class GamesController extends Controller
 {
@@ -73,8 +74,8 @@ class GamesController extends Controller
 
         abort_if(!$game, 404);
         //
-
-        //dump($this->formatGameForView($game[0]));
+        // dump($game[0]);
+        //dd($this->formatGameForView($game[0]));
 
         return view('show', [
             'game' => $this->formatGameForView($game[0]),
@@ -91,7 +92,8 @@ class GamesController extends Controller
             'platforms' => isset($game['platforms']) ? collect($game['platforms'])->pluck('abbreviation')->implode(', ') : '',
             'rating' => isset($game['rating']) ? round($game['rating']) : 0,
             'criticRating' => isset($game['aggregated_rating']) ? round($game['aggregated_rating']) : 0,
-            'trailer' => isset($game['videos']) ? 'https://youtube.com/watch/' . $game['videos'][0]['video_id'] : null,
+            'trailer' => isset($game['videos']) ? 'https://youtube.com/watch/' . $game['videos'][0]['video_id'] : Null,
+            'summary' => isset($game['summary']) ? $game['summary'] : '',
             'screenshots' => isset($game['screenshots']) ? collect($game['screenshots'])->map(function ($screenshot) {
                 return [
                     'big' => Str::replaceFirst('thumb', 'screenshot_big', $screenshot['url']),
@@ -109,7 +111,7 @@ class GamesController extends Controller
                         : null
                 ]);
             })->take(6) : [null],
-            'social' => isset($game['social']) ? [
+            'social' => isset($game['websites']) ? [
                 'website' => collect($game['websites'])->first(),
                 'facebook' => collect($game['websites'])->filter(function ($website) {
                     return Str::contains($website['url'], 'facebook');
@@ -120,11 +122,9 @@ class GamesController extends Controller
                 'instagram' => collect($game['websites'])->filter(function ($website) {
                     return Str::contains($website['url'], 'instagram');
                 })->first(),
-            ] : null
 
+            ] : ['', '', '', '']
         ]);
-        // dump($temp);
-
     }
 
 
